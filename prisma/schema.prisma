@@ -24,8 +24,10 @@ model  Psychologist {
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
 
-  patients    Patient[]
-  sessions    Session[]   
+  patients      Patient[]
+  sessions      Session[]   
+  appointments  Appointment[]
+  users         User[]  
   @@map("psychologists") 
 }
 
@@ -33,16 +35,17 @@ model  Psychologist {
 model Patient {
   id             String      @id @default(uuid()) @db.Uuid
   psychologistId String      @db.Uuid
-  name           String?     @db.VarChar(255)
+  name           String      @db.VarChar(255)
   email          String?     @db.VarChar(255)
-  phone          String?     @db.VarChar(20)
-  birthDate      DateTime?   
+  phone          String      @db.VarChar(20)
+  birthDate      DateTime   
   notes          String?     @db.Text
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
   deletedAt      DateTime?
 
   sessions    Session[]  
+  appointments Appointment[]
   psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
 
   @@index([psychologistId])
@@ -72,6 +75,7 @@ model Session {
   status                 SessionStatus   @default(SCHEDULED)
   createdAt              DateTime        @default(now())
   updatedAt              DateTime        @updatedAt
+  deletedAt      DateTime?
 
   psychologist           Psychologist    @relation(fields: [psychologistId], references: [id])
   patient                Patient         @relation(fields: [patientId], references: [id])
@@ -80,3 +84,52 @@ model Session {
   @@index([patientId])
   @@map("sessions")
 }
+
+enum AppointmentStatus {
+  PENDING     // aguardando confirmação
+  CONFIRMED   // confirmado
+  RESCHEDULED // reagendado
+  CANCELED    // cancelado
+}
+
+
+model Appointment{
+    id                    String          @id @default(uuid()) @db.Uuid
+    start                 DateTime
+    end                   DateTime
+    status                AppointmentStatus
+    psychologistId        String          @db.Uuid
+    patientId             String          @db.Uuid
+    createdAt             DateTime          @default(now())
+    updatedAt             DateTime          @updatedAt
+    deletedAt             DateTime?
+ 
+    psychologist          Psychologist    @relation(fields: [psychologistId], references: [id])
+    patient               Patient         @relation(fields: [patientId], references: [id])
+
+    @@index([psychologistId])
+    @@index([patientId])
+    @@map("appointments")
+}
+
+enum UserRole {
+  ADMIN
+  PSYCHOLOGIST
+  STAFF // opcional para assistentes, secretárias, etc.
+}
+
+model User {
+  id             String        @id @default(uuid()) @db.Uuid
+  email          String        @unique
+  password       String
+  role           UserRole
+  psychologistId String?       @db.Uuid
+  psychologist   Psychologist? @relation(fields: [psychologistId], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  deletedAt      DateTime?
+
+  @@index([psychologistId])
+  @@map("users")
+}
+

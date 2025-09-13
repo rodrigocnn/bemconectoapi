@@ -164,7 +164,31 @@ exports.Prisma.SessionScalarFieldEnum = {
   techniqueUsed: 'techniqueUsed',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.AppointmentScalarFieldEnum = {
+  id: 'id',
+  start: 'start',
+  end: 'end',
+  status: 'status',
+  psychologistId: 'psychologistId',
+  patientId: 'patientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  role: 'role',
+  psychologistId: 'psychologistId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -187,10 +211,25 @@ exports.SessionStatus = exports.$Enums.SessionStatus = {
   CANCELED: 'CANCELED'
 };
 
+exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  RESCHEDULED: 'RESCHEDULED',
+  CANCELED: 'CANCELED'
+};
+
+exports.UserRole = exports.$Enums.UserRole = {
+  ADMIN: 'ADMIN',
+  PSYCHOLOGIST: 'PSYCHOLOGIST',
+  STAFF: 'STAFF'
+};
+
 exports.Prisma.ModelName = {
   Psychologist: 'Psychologist',
   Patient: 'Patient',
-  Session: 'Session'
+  Session: 'Session',
+  Appointment: 'Appointment',
+  User: 'User'
 };
 
 /**
