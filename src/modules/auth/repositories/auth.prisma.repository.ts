@@ -6,11 +6,11 @@ export class AuthPrismaRepository implements IAuthRepository {
   constructor(private prisma: PrismaClient) {}
 
   async findByEmail(email: string) {
-    return this.prisma.psychologist.findUnique({ where: { email } });
+    return this.prisma.user.findUnique({ where: { email } });
   }
 
   async exists(id: string): Promise<boolean> {
-    const result = await this.prisma.psychologist.findUnique({
+    const result = await this.prisma.user.findUnique({
       where: { id },
     });
 
