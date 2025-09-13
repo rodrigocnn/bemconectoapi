@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 interface JwtPayload {
   sub: string;
   email: string;
+  role: string;
 }
 
 export function authMiddleware(
@@ -31,6 +32,7 @@ export function authMiddleware(
     req.user = {
       id: decoded.sub,
       email: decoded.email,
+      role: decoded.role,
     };
 
     return next();
