@@ -6,9 +6,9 @@ export function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  console.error(err); // log no console para depuração
+  console.error(err);
 
-  const statusCode = err.statusCode || 500; // se erro customizado tiver statusCode
+  const statusCode = err.statusCode || 500;
   const message = err.message || "Erro interno do servidor";
 
   res.status(statusCode).json({

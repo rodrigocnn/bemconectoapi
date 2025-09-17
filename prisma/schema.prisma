@@ -85,6 +85,9 @@ model Session {
   @@map("sessions")
 }
 
+
+
+
 enum AppointmentStatus {
   PENDING     // aguardando confirmação
   CONFIRMED   // confirmado

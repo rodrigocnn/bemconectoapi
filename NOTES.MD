@@ -18,3 +18,4 @@ sudo systemctl enable redis
 
 npx prisma migrate dev --name create_patient
 npx prisma migrate dev --name create_session
+npx prisma migrate dev --name create_user

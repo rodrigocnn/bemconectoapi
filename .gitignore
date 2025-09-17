@@ -1,6 +1,9 @@
 # Node modules
 node_modules/
 
+# Pasta Dist
+dist/
+
 # Environment variables
 .env
 
@@ -12,3 +15,4 @@ prisma/generated
 
 # Optional local notes
 NOTES.md
+TODO.md
