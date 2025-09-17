@@ -12,7 +12,9 @@ export class PatientPrismaRepository implements IPatientRepository {
   }
 
   async read(): Promise<ResponsePatientDTO[]> {
-    const patients = await this.prisma.patient.findMany();
+    const patients = await this.prisma.patient.findMany({
+      where: { deletedAt: null },
+    });
     return patients;
   }
 
@@ -31,7 +33,12 @@ export class PatientPrismaRepository implements IPatientRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.prisma.patient.delete({ where: { id } });
+    await this.prisma.patient.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
   }
 
   async exists(id: string): Promise<boolean> {
