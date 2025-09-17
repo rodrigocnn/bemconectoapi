@@ -25,8 +25,15 @@ export class AuthService {
       throw error;
     }
 
+    userExist.psychologistId;
+
     const token = jwt.sign(
-      { sub: userExist.id, email: userExist.email, role: userExist.role },
+      {
+        sub: userExist.id,
+        email: userExist.email,
+        role: userExist.role,
+        psychologistId: userExist.psychologistId,
+      },
       process.env.JWT_SECRET as string,
       { expiresIn: "1d" }
     );
@@ -35,6 +42,7 @@ export class AuthService {
       id: userExist.id,
       email: userExist.email,
       role: userExist.role,
+      psychologistId: userExist.psychologistId,
       token,
       expiresIn: "1d",
     };
