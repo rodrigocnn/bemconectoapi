@@ -7,18 +7,25 @@ import { validateReservation } from "../validations/validate-session";
 export class SessionController {
   constructor(private sessionService: SessionService) {}
 
+  private sessionParams(req: Request) {
+    return {
+      ...req.body,
+      psychologistId: req.user!.psychologistId,
+    };
+  }
+
   async create(req: Request, res: Response) {
     const isValid = validateReservation(createReservationSchema, req, res);
     if (!isValid) return res;
 
     try {
-      const data = req.body;
+      const data = this.sessionParams(req);
       const client = await this.sessionService.create(data);
 
       return res.status(201).json(client);
     } catch (error: any) {
       return res.status(500).json({
-        message: error.message || "Erro ao criar reserva",
+        message: error.message || "Erro ao criar Sessão",
       });
     }
   }
