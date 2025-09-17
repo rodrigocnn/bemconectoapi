@@ -7,7 +7,7 @@ export class AppointmentController {
   private appointmentParams(req: Request) {
     return {
       ...req.body,
-      psychologistId: req.user!.id,
+      psychologistId: req.user!.psychologistId,
     };
   }
 
