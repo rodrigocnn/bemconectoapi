@@ -13,16 +13,16 @@ const sessionRepository = new SessionPrismaRepository(prisma);
 const sessionService = new SessionService(sessionRepository);
 const sessionController = new SessionController(sessionService);
 
-sessionRoutes.post("/sessoes", authMiddleware, (req, res) =>
+sessionRoutes.post("/sessao", authMiddleware, (req, res) =>
   sessionController.create(req, res)
 );
-sessionRoutes.get("/session", authMiddleware, (req, res) =>
+sessionRoutes.get("/sessao", authMiddleware, (req, res) =>
   sessionController.read(req, res)
 );
-sessionRoutes.put("/session/:id", authMiddleware, (req, res) =>
+sessionRoutes.put("/sessao/:id", authMiddleware, (req, res) =>
   sessionController.update(req, res)
 );
 
-sessionRoutes.delete("/session/:id", authMiddleware, (req, res) =>
+sessionRoutes.delete("/sessao/:id", authMiddleware, (req, res) =>
   sessionController.delete(req, res)
 );
