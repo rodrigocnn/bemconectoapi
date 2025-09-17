@@ -4,11 +4,10 @@ import { PatientService } from "../services/patient.service";
 export class PatientController {
   constructor(private patientService: PatientService) {}
 
-  // Método helper para processar o body
   private patientParams(req: Request) {
     return {
       ...req.body,
-      psychologistId: req.user!.id, // injeta automaticamente
+      psychologistId: req.user!.id,
     };
   }
 
@@ -30,6 +29,16 @@ export class PatientController {
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Erro ao buscar pacientes" });
+    }
+  }
+
+  async show(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const patient = await this.patientService.show(id);
+      return res.status(200).json(patient);
+    } catch (error) {
+      return res.status(500).json({ message: "Erro ao buscar paciente" });
     }
   }
 
