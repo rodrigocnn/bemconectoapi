@@ -15,18 +15,14 @@ appointmentRoutes.post("/agenda", authMiddleware, (req, res) =>
   appointmentController.create(req, res)
 );
 
-appointmentRoutes.get("/appointments", authMiddleware, (req, res) =>
+appointmentRoutes.get("/agenda", authMiddleware, (req, res) =>
   appointmentController.read(req, res)
 );
 
-appointmentRoutes.get("/appointments/:id", authMiddleware, (req, res) =>
+appointmentRoutes.get("/agenda/:id", authMiddleware, (req, res) =>
   appointmentController.show(req, res)
 );
 
-appointmentRoutes.put("/appointments/:id", authMiddleware, (req, res) =>
+appointmentRoutes.put("/agenda/:id", authMiddleware, (req, res) =>
   appointmentController.update(req, res)
-);
-
-appointmentRoutes.delete("/appointments/:id", authMiddleware, (req, res) =>
-  appointmentController.delete(req, res)
 );
