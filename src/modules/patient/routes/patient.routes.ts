@@ -18,6 +18,11 @@ patientRoutes.post("/pacientes", authMiddleware, (req, res) =>
 patientRoutes.get("/pacientes", authMiddleware, (req, res) =>
   clientController.read(req, res)
 );
+
+patientRoutes.get("/pacientes/:id", authMiddleware, (req, res) =>
+  clientController.show(req, res)
+);
+
 patientRoutes.put("/pacientes/:id", authMiddleware, (req, res) =>
   clientController.update(req, res)
 );
