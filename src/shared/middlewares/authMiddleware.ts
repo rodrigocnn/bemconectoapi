@@ -5,6 +5,7 @@ interface JwtPayload {
   sub: string;
   email: string;
   role: string;
+  psychologistId: string;
 }
 
 export function authMiddleware(
@@ -33,6 +34,7 @@ export function authMiddleware(
       id: decoded.sub,
       email: decoded.email,
       role: decoded.role,
+      psychologistId: decoded.psychologistId,
     };
 
     return next();
