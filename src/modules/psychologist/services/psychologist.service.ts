@@ -23,4 +23,7 @@ export class PsychologistService {
   async read(): Promise<PsychologistResponseDTO[]> {
     return this.psychologistRepository.read();
   }
+  async show(id: string): Promise<PsychologistResponseDTO> {
+    return this.psychologistRepository.show(id);
+  }
 }

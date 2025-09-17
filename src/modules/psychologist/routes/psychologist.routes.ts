@@ -23,4 +23,11 @@ psychologistsRoutes.get(
   (req, res) => psychologistController.read(req, res)
 );
 
+psychologistsRoutes.get(
+  "/psicologos/:id",
+  authMiddleware,
+  //authorize(["ADMIN"]),
+  (req, res) => psychologistController.show(req, res)
+);
+
 export default psychologistsRoutes;

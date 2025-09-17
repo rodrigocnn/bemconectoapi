@@ -21,4 +21,8 @@ export class PsychologistPrismaRepository implements IPsychologistRepository {
   async findByEmail(email: string) {
     return this.prisma.psychologist.findUnique({ where: { email } });
   }
+
+  async show(id: string) {
+    return this.prisma.psychologist.findFirst({ where: { id: id } });
+  }
 }

@@ -22,7 +22,17 @@ export class PsychologistController {
       return res.status(200).json(psychologists);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: "Erro ao buscar pacientes" });
+      return res.status(500).json({ message: "Erro ao buscar Psicologo" });
+    }
+  }
+
+  async show(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const psychologist = await this.psychologistService.show(id);
+      return res.status(200).json(psychologist);
+    } catch (error) {
+      return res.status(500).json({ message: "Erro ao buscar Psicologos" });
     }
   }
 }
