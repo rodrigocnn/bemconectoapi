@@ -1,5 +1,5 @@
-import { CreateLoginDTO } from "../dtos/create-login.dto";
+import { ResponseLoginDTO } from "../dtos/response-login-user.dto";
 
 export interface IAuthRepository {
-  findByEmail(email: string): Promise<CreateLoginDTO>;
+  findByEmail(email: string): Promise<ResponseLoginDTO>;
 }
