@@ -58,8 +58,8 @@ describe("PatientService", () => {
       (mockPatientRepository.read as jest.Mock).mockResolvedValue(
         expectedPatients
       );
-
-      const result = await patientService.read();
+      const psychologistId = "e497d9ce-2614-453b-baca-4292dfdea031";
+      const result = await patientService.read(psychologistId);
 
       expect(mockPatientRepository.read).toHaveBeenCalled();
       expect(result).toEqual(expectedPatients);
