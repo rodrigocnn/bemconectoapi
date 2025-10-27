@@ -4,20 +4,10 @@ import jwt from "jsonwebtoken";
 import { PsychologistService } from "./psychologist.service";
 import { IPsychologistRepository } from "../repositories/psychologist.repository";
 import { CreatePsychologistDTO } from "../dtos/create-psychologist.dto";
-
-export function makePsychologist(): CreatePsychologistDTO {
-  return {
-    name: "Rodrigo César",
-    birth: "1990-05-15",
-    email: "rodrigo@gmail.com",
-    cpf: "123.456.789-00",
-    rg: "12.345.678-9",
-    crp: "06/123456",
-    password: "hashed_password",
-    phone: "(11) 98765-4321",
-    specialty: "Terapia Cognitivo-Comportamental",
-  };
-}
+import {
+  psychologistData,
+  psychologistResponse,
+} from "../_mocks_/psycholist.mocks";
 
 jest.mock("bcrypt", () => ({
   hash: jest.fn(),
@@ -29,42 +19,32 @@ jest.mock("jsonwebtoken", () => ({
 }));
 
 describe("PsychologistService", () => {
-  let mockPsychologistRepository: IPsychologistRepository;
+  let mockRepo: IPsychologistRepository;
   let psychologistService: PsychologistService;
 
   beforeEach(() => {
-    mockPsychologistRepository = {
+    mockRepo = {
       create: jest.fn(),
       findByEmail: jest.fn(),
+      read: jest.fn(),
+      update: jest.fn(),
+      show: jest.fn(),
     };
 
     (bcrypt.hash as jest.Mock).mockResolvedValue("hashed_password");
     (bcrypt.compare as jest.Mock).mockResolvedValue(true);
     (jwt.sign as jest.Mock).mockReturnValue("fake_jwt_token");
-    psychologistService = new PsychologistService(mockPsychologistRepository);
+    psychologistService = new PsychologistService(mockRepo);
   });
 
   describe("create", () => {
     it("should create a client successfully", async () => {
-      const psychologistData = makePsychologist();
-      const expectedPsychologist = {
-        id: "dd682b13-476e-4830-9f51-60aeb3cb4e7c",
-        ...psychologistData,
-        password: "hashed_password",
-        createdAt: "2025-08-31T18:16:54.236Z",
-        updatedAt: "2025-08-31T18:16:54.236Z",
-      };
-
-      (mockPsychologistRepository.create as jest.Mock).mockResolvedValue(
-        expectedPsychologist
-      );
+      (mockRepo.create as jest.Mock).mockResolvedValue(psychologistResponse);
 
       const result = await psychologistService.create(psychologistData);
 
-      expect(mockPsychologistRepository.create).toHaveBeenCalledWith(
-        psychologistData
-      );
-      expect(result).toEqual(expectedPsychologist);
+      expect(mockRepo.create).toHaveBeenCalledWith(psychologistData);
+      expect(result).toEqual(psychologistResponse);
     });
   });
 });
