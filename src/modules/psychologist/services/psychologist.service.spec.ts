@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { PsychologistService } from "./psychologist.service";
 import { IPsychologistRepository } from "../repositories/psychologist.repository";
-import { CreatePsychologistDTO } from "../dtos/create-psychologist.dto";
+
 import {
   psychologistData,
   psychologistResponse,

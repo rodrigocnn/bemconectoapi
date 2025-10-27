@@ -21,12 +21,20 @@ describe("authMiddleware", () => {
     req.headers.authorization = "Bearer valid_token";
 
     (jwt.verify as jest.Mock).mockReturnValue({
-      id: "123",
+      sub: "123",
       email: "test@example.com",
+      psychologistId: "e497d9ce-2614-453b-baca-4292dfdea031",
+      role: "PSYCHOLOGIST",
     });
 
     authMiddleware(req, res, next);
-    expect(req.user).toEqual({ id: "123", email: "test@example.com" });
+
+    expect(req.user).toEqual({
+      id: "123", // o middleware transforma sub → id
+      email: "test@example.com",
+      psychologistId: "e497d9ce-2614-453b-baca-4292dfdea031",
+      role: "PSYCHOLOGIST",
+    });
     expect(next).toHaveBeenCalled();
   });
 

@@ -1,18 +1,7 @@
-import { CreatePatientDTO } from "../dtos/create-patient.dto";
+import { patientData } from "../_mocks_/patient.mocks";
+
 import { IPatientRepository } from "../repositories/patient.repository";
 import { PatientService } from "./patient.service";
-
-function makePatient(): CreatePatientDTO {
-  return {
-    psychologistId: "1",
-    name: "Rodrigo César",
-    email: "rodrigo@exemplo.com",
-    birthDate: "1985-05-01",
-    phone: "(11) 99999-0000",
-    cpf: "11122233344",
-    rg: "0928901564",
-  };
-}
 
 describe("PatientService", () => {
   let mockPatientRepository: IPatientRepository;
@@ -26,6 +15,7 @@ describe("PatientService", () => {
       show: jest.fn(),
       delete: jest.fn(),
       exists: jest.fn(),
+      emailAlreadyExist: jest.fn(),
     };
 
     patientService = new PatientService(mockPatientRepository);
@@ -33,7 +23,6 @@ describe("PatientService", () => {
 
   describe("create", () => {
     it("should create a patient successfully", async () => {
-      const patientData = makePatient();
       const expectedPatient = { id: "uuid-123", ...patientData };
 
       (mockPatientRepository.create as jest.Mock).mockResolvedValue(
@@ -49,7 +38,6 @@ describe("PatientService", () => {
 
   describe("read", () => {
     it("should return all paient successfully", async () => {
-      const patientData = makePatient();
       const expectedPatients = [
         { id: "uuid-123", ...patientData },
         { id: "uuid-456", ...patientData },
@@ -68,10 +56,13 @@ describe("PatientService", () => {
 
   describe("update", () => {
     it("should update patient successfully", async () => {
-      const patientData = makePatient();
       const expectedPatient = [{ id: "uuid-123", ...patientData }];
 
       (mockPatientRepository.update as jest.Mock).mockResolvedValue(
+        expectedPatient
+      );
+
+      (mockPatientRepository.show as jest.Mock).mockResolvedValue(
         expectedPatient
       );
 
@@ -94,7 +85,6 @@ describe("PatientService", () => {
 
   describe("show", () => {
     it("should return a unique patient successfully", async () => {
-      const patientData = makePatient();
       const expectedPatient = [{ id: "uuid-123", ...patientData }];
 
       (mockPatientRepository.show as jest.Mock).mockResolvedValue(
