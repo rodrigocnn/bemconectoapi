@@ -1,8 +1,13 @@
+import { AppointmentStatus } from "../enums";
+
 export interface ResponseAppointmentDTO {
   id: string;
   start: Date;
   end: Date;
-  status: "PENDING" | "CONFIRMED" | "RESCHEDULED" | "CANCELED";
+  status: string;
+  backgroundColor: string;
+  textColor: string;
+  display: string;
   psychologistId: string;
   patientId: string;
   createdAt: Date;

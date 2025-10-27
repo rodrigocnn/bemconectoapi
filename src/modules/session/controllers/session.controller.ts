@@ -32,22 +32,36 @@ export class SessionController {
 
   async read(req: Request, res: Response) {
     try {
-      const clients = await this.sessionService.read();
+      const psychologistId = req.user!.psychologistId;
+      const { idPatient } = req.params;
+      const clients = await this.sessionService.read(psychologistId, idPatient);
       return res.status(200).json(clients);
     } catch (error) {
       return res.status(500).json({ message: "Erro ao buscar reservas" });
     }
   }
 
+  async show(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const session = await this.sessionService.show(id);
+      return res.status(200).json(session);
+    } catch (error) {
+      return res.status(500).json({ message: "Erro ao buscar sessão" });
+    }
+  }
+
   async update(req: Request, res: Response) {
     try {
       const { id } = req.params;
+
       const data = req.body;
+      console.log("data", data);
       const client = await this.sessionService.update(id, data);
 
       return res.status(201).json(client);
     } catch (error) {
-      return res.status(500).json({ message: "Erro ao criar reserva" });
+      return res.status(500).json({ message: "Erro ao atualizar sessão" });
     }
   }
 

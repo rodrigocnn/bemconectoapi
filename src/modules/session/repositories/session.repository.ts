@@ -3,7 +3,10 @@ import { ResponseSessionDTO } from "../dtos/response-session.dto";
 
 export interface ISessionRepository {
   create(data: CreateSessionDTO): Promise<ResponseSessionDTO>;
-  read(): Promise<ResponseSessionDTO[]>;
+  read(
+    psychologistId: string,
+    patientId: string
+  ): Promise<ResponseSessionDTO[]>;
   update(
     id: string,
     data: CreateSessionDTO

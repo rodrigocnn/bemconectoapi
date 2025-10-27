@@ -3,6 +3,7 @@ export interface ResponseSessionDTO {
   psychologistId: string;
   patientId: string;
   sessionDate: Date;
+  sessionDateFormatted?: string;
   summary?: string;
   behavioralObservations?: string;
   interventions?: string;
@@ -14,4 +15,5 @@ export interface ResponseSessionDTO {
   status: "SCHEDULED" | "COMPLETED" | "CANCELED";
   createdAt: Date;
   updatedAt: Date;
+  deletedAt: Date | null;
 }

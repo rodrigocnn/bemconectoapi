@@ -16,9 +16,14 @@ const sessionController = new SessionController(sessionService);
 sessionRoutes.post("/sessao", authMiddleware, (req, res) =>
   sessionController.create(req, res)
 );
-sessionRoutes.get("/sessao", authMiddleware, (req, res) =>
+sessionRoutes.get("/sessao/:idPatient", authMiddleware, (req, res) =>
   sessionController.read(req, res)
 );
+
+sessionRoutes.get("/sessao-show/:id", authMiddleware, (req, res) =>
+  sessionController.show(req, res)
+);
+
 sessionRoutes.put("/sessao/:id", authMiddleware, (req, res) =>
   sessionController.update(req, res)
 );

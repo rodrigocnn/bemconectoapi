@@ -1,97 +1,143 @@
-# 🧠 Sistema de Gestão para Psicólogos
+# BemConecto API
 
-Um sistema desenvolvido em **Node.js + TypeScript** para apoiar psicólogos na **gestão de atendimentos**, incluindo **cadastro de pacientes, agenda, sessões **, com autenticação de usuários e persistência em banco de dados via **Prisma + PostgreSQL**.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-- Node.js + Express
-- TypeScript
-- Prisma ORM
-- PostgreSQL
-- JWT (autenticação)
-- Zod (validação de dados)
-- Jest (testes automatizados)
+The **BemConecto API** is the official backend for the **BemConecto** system — a platform designed to support psychologists in managing their practice, including patient registration, appointment scheduling, and session tracking.  
+Built with **Node.js + TypeScript**, the API provides a modular architecture, strong validation, and secure authentication using **JWT**.
 
 ---
 
-## 📂 Estrutura de Pastas
+## ✨ Overview
 
-- **src/database** → Configuração do Prisma
-- **src/modules** → Domínios do sistema
-  - appointments
-  - auth
-  - patient
-  - psychologist
-  - session
-- **src/shared** → Recursos compartilhados
-  - middlewares
-  - routes
-  - utils
+The API offers all the necessary resources for psychologists and clinics to manage their daily workflow efficiently and in one place.  
+It integrates seamlessly with the frontend built in **Next.js + React**, exposing RESTful endpoints for complete CRUD operations and user authentication.
 
 ---
 
-## ⚙️ Instalação e Configuração
+## 🧱 Tech Stack
 
-1. Clone o repositório
-2. Instale as dependências com `yarn install`
-3. Configure o arquivo `.env` com:
-   - `DATABASE_URL="postgresql://user:password@localhost:5432/sistema_psicologos"`
-   - `JWT_SECRET="sua_chave_secreta"`
-4. Rode as migrations do Prisma com `yarn prisma migrate dev --name init`
-
----
-
-## ▶️ Executando o Projeto
-
-- **Ambiente de desenvolvimento**: `yarn dev`
-- **Produção**: `yarn build` seguido de `yarn start`
+- **Node.js + Express** – Framework for scalable and high-performance APIs
+- **TypeScript** – Static typing for better reliability
+- **Prisma ORM** – Object-relational mapping and database migrations
+- **PostgreSQL** – Relational database
+- **JWT** – Token-based authentication
+- **Zod** – Input data validation
+- **Jest** – Automated testing
 
 ---
 
-## 📡 Exemplos de Endpoints
+## 🗂 Project Structure
 
-### Cadastro de Paciente
+```text
+src/
+├── database/ → Prisma configuration and database connection
+├── modules/ → Domain-based modules
+│ ├── appointments/ → Appointment management
+│ ├── auth/ → Authentication and access control
+│ ├── patient/ → Patient registration and management
+│ ├── psychologist/ → Psychologist management
+│ └── session/ → Therapy sessions
+└── shared/ → Shared utilities and resources
+  ├── middlewares/
+  ├── routes/
+  └── utils/
+```
 
-**POST /patients**  
-Body:
+## ⚙️ Installation and Setup
 
-- name
-- email
-- birth
-- phone
+1. Clone the repository:  
+   git clone https://github.com/rodrigocnn/bemconecto-api.git
 
-### Criar Sessão
+2. Enter the project directory:  
+   cd bemconecto-api
 
-**POST /sessions**  
-Headers: Authorization Bearer Token  
-Body:
+3. Install dependencies:  
+   yarn install
 
-- sessionDate
-- patientId
-- psychologistId
-- summary
+### 🔧 Environment Variables
 
-### Listar Agenda
+Create a `.env` file in the root directory and include:
 
-**GET /appointments**  
-Headers: Authorization Bearer Token
+DATABASE_URL="postgresql://user:password@localhost:5432/bemconecto"  
+JWT_SECRET="your_secret_key"
 
-## 🧪 Testes
+### 🗃️ Prisma Migrations
 
-- Rodar todos os testes: `yarn test`
-- Rodar com coverage: `yarn test --coverage`
+Run the database migrations:
 
-## 🤝 Contribuição
+yarn prisma migrate dev --name init
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`feature/minha-feature`)
-3. Commit suas alterações
-4. Faça push para sua branch
-5. Abra um Pull Request 🚀
+## ▶️ Running the Project
 
-## 📄 Licença
+Development mode:  
+yarn dev
 
-Este projeto está sob a licença **MIT**.  
-Sinta-se livre para usar, modificar e compartilhar.
+Production:  
+yarn build  
+yarn start
+
+---
+
+## 📡 Example Endpoints
+
+### Create Patient
+
+Method: POST  
+Route: /patients  
+Header: Content-Type: application/json
+
+Body:  
+name  
+email  
+birth  
+phone
+
+---
+
+### Create Session
+
+Method: POST  
+Route: /sessions  
+Header: Authorization: Bearer <token>
+
+Body:  
+sessionDate  
+patientId  
+psychologistId  
+summary
+
+---
+
+### List Appointments
+
+Method: GET  
+Route: /appointments  
+Header: Authorization: Bearer <token>
+
+---
+
+## 🧪 Testing
+
+Run all tests:  
+yarn test
+
+Run with coverage:  
+yarn test --coverage
+
+---
+
+## 🤝 Contributing
+
+This project is currently private and not open to external contributions.  
+For future collaboration:
+
+1. Fork the repository
+2. Create a branch: feature/my-feature
+3. Commit your changes
+4. Push your branch
+5. Open a Pull Request 🚀
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.  
+Feel free to use, modify, and share it.

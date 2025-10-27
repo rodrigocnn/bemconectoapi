@@ -9,8 +9,11 @@ export class SessionService {
     return this.sessionRepository.create(data);
   }
 
-  async read(): Promise<ResponseSessionDTO[]> {
-    return this.sessionRepository.read();
+  async read(
+    psychologistId: string,
+    patientId: string
+  ): Promise<ResponseSessionDTO[]> {
+    return this.sessionRepository.read(psychologistId, patientId);
   }
 
   async show(id: string): Promise<ResponseSessionDTO | null> {

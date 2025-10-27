@@ -141,6 +141,9 @@ exports.Prisma.PatientScalarFieldEnum = {
   psychologistId: 'psychologistId',
   name: 'name',
   email: 'email',
+  cpf: 'cpf',
+  rg: 'rg',
+  gender: 'gender',
   phone: 'phone',
   birthDate: 'birthDate',
   notes: 'notes',
@@ -173,6 +176,9 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   start: 'start',
   end: 'end',
   status: 'status',
+  backgroundColor: 'backgroundColor',
+  textColor: 'textColor',
+  display: 'display',
   psychologistId: 'psychologistId',
   patientId: 'patientId',
   createdAt: 'createdAt',
@@ -205,6 +211,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Gender = exports.$Enums.Gender = {
+  MASCULINO: 'MASCULINO',
+  FEMININO: 'FEMININO'
+};
+
 exports.SessionStatus = exports.$Enums.SessionStatus = {
   SCHEDULED: 'SCHEDULED',
   COMPLETED: 'COMPLETED',
@@ -212,10 +223,12 @@ exports.SessionStatus = exports.$Enums.SessionStatus = {
 };
 
 exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
-  PENDING: 'PENDING',
+  SCHEDULED: 'SCHEDULED',
   CONFIRMED: 'CONFIRMED',
   RESCHEDULED: 'RESCHEDULED',
-  CANCELED: 'CANCELED'
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED',
+  PENDING: 'PENDING'
 };
 
 exports.UserRole = exports.$Enums.UserRole = {

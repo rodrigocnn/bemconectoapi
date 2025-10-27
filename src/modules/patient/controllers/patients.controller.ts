@@ -7,7 +7,7 @@ export class PatientController {
   private patientParams(req: Request) {
     return {
       ...req.body,
-      psychologistId: req.user!.id,
+      psychologistId: req.user!.psychologistId,
     };
   }
 
@@ -16,18 +16,21 @@ export class PatientController {
       const data = this.patientParams(req);
       const client = await this.patientService.create(data);
       return res.status(201).json(client);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Erro ao criar paciente" });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      }
+
+      return res.status(500).json({ message: String(error) });
     }
   }
 
   async read(req: Request, res: Response) {
     try {
-      const clients = await this.patientService.read();
-      return res.status(200).json(clients);
+      const psychologistId = req.user!.psychologistId;
+      const patients = await this.patientService.read(psychologistId);
+      return res.status(200).json(patients);
     } catch (error) {
-      console.error(error);
       return res.status(500).json({ message: "Erro ao buscar pacientes" });
     }
   }
@@ -49,8 +52,11 @@ export class PatientController {
       const client = await this.patientService.update(id, data);
       return res.status(201).json(client);
     } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Erro ao criar paciente" });
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      }
+
+      return res.status(500).json({ message: String(error) });
     }
   }
 

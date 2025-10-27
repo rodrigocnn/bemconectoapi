@@ -43,7 +43,15 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * Enums
  */
 export namespace $Enums {
-  export const SessionStatus: {
+  export const Gender: {
+  MASCULINO: 'MASCULINO',
+  FEMININO: 'FEMININO'
+};
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const SessionStatus: {
   SCHEDULED: 'SCHEDULED',
   COMPLETED: 'COMPLETED',
   CANCELED: 'CANCELED'
@@ -53,10 +61,12 @@ export type SessionStatus = (typeof SessionStatus)[keyof typeof SessionStatus]
 
 
 export const AppointmentStatus: {
-  PENDING: 'PENDING',
+  SCHEDULED: 'SCHEDULED',
   CONFIRMED: 'CONFIRMED',
   RESCHEDULED: 'RESCHEDULED',
-  CANCELED: 'CANCELED'
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED',
+  PENDING: 'PENDING'
 };
 
 export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof AppointmentStatus]
@@ -71,6 +81,10 @@ export const UserRole: {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 }
+
+export type Gender = $Enums.Gender
+
+export const Gender: typeof $Enums.Gender
 
 export type SessionStatus = $Enums.SessionStatus
 
@@ -2635,6 +2649,9 @@ export namespace Prisma {
     psychologistId: string | null
     name: string | null
     email: string | null
+    cpf: string | null
+    rg: string | null
+    gender: $Enums.Gender | null
     phone: string | null
     birthDate: Date | null
     notes: string | null
@@ -2648,6 +2665,9 @@ export namespace Prisma {
     psychologistId: string | null
     name: string | null
     email: string | null
+    cpf: string | null
+    rg: string | null
+    gender: $Enums.Gender | null
     phone: string | null
     birthDate: Date | null
     notes: string | null
@@ -2661,6 +2681,9 @@ export namespace Prisma {
     psychologistId: number
     name: number
     email: number
+    cpf: number
+    rg: number
+    gender: number
     phone: number
     birthDate: number
     notes: number
@@ -2676,6 +2699,9 @@ export namespace Prisma {
     psychologistId?: true
     name?: true
     email?: true
+    cpf?: true
+    rg?: true
+    gender?: true
     phone?: true
     birthDate?: true
     notes?: true
@@ -2689,6 +2715,9 @@ export namespace Prisma {
     psychologistId?: true
     name?: true
     email?: true
+    cpf?: true
+    rg?: true
+    gender?: true
     phone?: true
     birthDate?: true
     notes?: true
@@ -2702,6 +2731,9 @@ export namespace Prisma {
     psychologistId?: true
     name?: true
     email?: true
+    cpf?: true
+    rg?: true
+    gender?: true
     phone?: true
     birthDate?: true
     notes?: true
@@ -2788,6 +2820,9 @@ export namespace Prisma {
     psychologistId: string
     name: string
     email: string | null
+    cpf: string | null
+    rg: string | null
+    gender: $Enums.Gender | null
     phone: string
     birthDate: Date
     notes: string | null
@@ -2818,6 +2853,9 @@ export namespace Prisma {
     psychologistId?: boolean
     name?: boolean
     email?: boolean
+    cpf?: boolean
+    rg?: boolean
+    gender?: boolean
     phone?: boolean
     birthDate?: boolean
     notes?: boolean
@@ -2835,6 +2873,9 @@ export namespace Prisma {
     psychologistId?: boolean
     name?: boolean
     email?: boolean
+    cpf?: boolean
+    rg?: boolean
+    gender?: boolean
     phone?: boolean
     birthDate?: boolean
     notes?: boolean
@@ -2849,6 +2890,9 @@ export namespace Prisma {
     psychologistId?: boolean
     name?: boolean
     email?: boolean
+    cpf?: boolean
+    rg?: boolean
+    gender?: boolean
     phone?: boolean
     birthDate?: boolean
     notes?: boolean
@@ -2863,6 +2907,9 @@ export namespace Prisma {
     psychologistId?: boolean
     name?: boolean
     email?: boolean
+    cpf?: boolean
+    rg?: boolean
+    gender?: boolean
     phone?: boolean
     birthDate?: boolean
     notes?: boolean
@@ -2871,7 +2918,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "psychologistId" | "name" | "email" | "phone" | "birthDate" | "notes" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["patient"]>
+  export type PatientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "psychologistId" | "name" | "email" | "cpf" | "rg" | "gender" | "phone" | "birthDate" | "notes" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["patient"]>
   export type PatientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | Patient$sessionsArgs<ExtArgs>
     appointments?: boolean | Patient$appointmentsArgs<ExtArgs>
@@ -2897,6 +2944,9 @@ export namespace Prisma {
       psychologistId: string
       name: string
       email: string | null
+      cpf: string | null
+      rg: string | null
+      gender: $Enums.Gender | null
       phone: string
       birthDate: Date
       notes: string | null
@@ -3333,6 +3383,9 @@ export namespace Prisma {
     readonly psychologistId: FieldRef<"Patient", 'String'>
     readonly name: FieldRef<"Patient", 'String'>
     readonly email: FieldRef<"Patient", 'String'>
+    readonly cpf: FieldRef<"Patient", 'String'>
+    readonly rg: FieldRef<"Patient", 'String'>
+    readonly gender: FieldRef<"Patient", 'Gender'>
     readonly phone: FieldRef<"Patient", 'String'>
     readonly birthDate: FieldRef<"Patient", 'DateTime'>
     readonly notes: FieldRef<"Patient", 'String'>
@@ -5025,6 +5078,9 @@ export namespace Prisma {
     start: Date | null
     end: Date | null
     status: $Enums.AppointmentStatus | null
+    backgroundColor: string | null
+    textColor: string | null
+    display: string | null
     psychologistId: string | null
     patientId: string | null
     createdAt: Date | null
@@ -5037,6 +5093,9 @@ export namespace Prisma {
     start: Date | null
     end: Date | null
     status: $Enums.AppointmentStatus | null
+    backgroundColor: string | null
+    textColor: string | null
+    display: string | null
     psychologistId: string | null
     patientId: string | null
     createdAt: Date | null
@@ -5049,6 +5108,9 @@ export namespace Prisma {
     start: number
     end: number
     status: number
+    backgroundColor: number
+    textColor: number
+    display: number
     psychologistId: number
     patientId: number
     createdAt: number
@@ -5063,6 +5125,9 @@ export namespace Prisma {
     start?: true
     end?: true
     status?: true
+    backgroundColor?: true
+    textColor?: true
+    display?: true
     psychologistId?: true
     patientId?: true
     createdAt?: true
@@ -5075,6 +5140,9 @@ export namespace Prisma {
     start?: true
     end?: true
     status?: true
+    backgroundColor?: true
+    textColor?: true
+    display?: true
     psychologistId?: true
     patientId?: true
     createdAt?: true
@@ -5087,6 +5155,9 @@ export namespace Prisma {
     start?: true
     end?: true
     status?: true
+    backgroundColor?: true
+    textColor?: true
+    display?: true
     psychologistId?: true
     patientId?: true
     createdAt?: true
@@ -5172,6 +5243,9 @@ export namespace Prisma {
     start: Date
     end: Date
     status: $Enums.AppointmentStatus
+    backgroundColor: string | null
+    textColor: string | null
+    display: string | null
     psychologistId: string
     patientId: string
     createdAt: Date
@@ -5201,6 +5275,9 @@ export namespace Prisma {
     start?: boolean
     end?: boolean
     status?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    display?: boolean
     psychologistId?: boolean
     patientId?: boolean
     createdAt?: boolean
@@ -5215,6 +5292,9 @@ export namespace Prisma {
     start?: boolean
     end?: boolean
     status?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    display?: boolean
     psychologistId?: boolean
     patientId?: boolean
     createdAt?: boolean
@@ -5229,6 +5309,9 @@ export namespace Prisma {
     start?: boolean
     end?: boolean
     status?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    display?: boolean
     psychologistId?: boolean
     patientId?: boolean
     createdAt?: boolean
@@ -5243,6 +5326,9 @@ export namespace Prisma {
     start?: boolean
     end?: boolean
     status?: boolean
+    backgroundColor?: boolean
+    textColor?: boolean
+    display?: boolean
     psychologistId?: boolean
     patientId?: boolean
     createdAt?: boolean
@@ -5250,7 +5336,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "start" | "end" | "status" | "psychologistId" | "patientId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "start" | "end" | "status" | "backgroundColor" | "textColor" | "display" | "psychologistId" | "patientId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     psychologist?: boolean | PsychologistDefaultArgs<ExtArgs>
     patient?: boolean | PatientDefaultArgs<ExtArgs>
@@ -5275,6 +5361,9 @@ export namespace Prisma {
       start: Date
       end: Date
       status: $Enums.AppointmentStatus
+      backgroundColor: string | null
+      textColor: string | null
+      display: string | null
       psychologistId: string
       patientId: string
       createdAt: Date
@@ -5709,6 +5798,9 @@ export namespace Prisma {
     readonly start: FieldRef<"Appointment", 'DateTime'>
     readonly end: FieldRef<"Appointment", 'DateTime'>
     readonly status: FieldRef<"Appointment", 'AppointmentStatus'>
+    readonly backgroundColor: FieldRef<"Appointment", 'String'>
+    readonly textColor: FieldRef<"Appointment", 'String'>
+    readonly display: FieldRef<"Appointment", 'String'>
     readonly psychologistId: FieldRef<"Appointment", 'String'>
     readonly patientId: FieldRef<"Appointment", 'String'>
     readonly createdAt: FieldRef<"Appointment", 'DateTime'>
@@ -7282,6 +7374,9 @@ export namespace Prisma {
     psychologistId: 'psychologistId',
     name: 'name',
     email: 'email',
+    cpf: 'cpf',
+    rg: 'rg',
+    gender: 'gender',
     phone: 'phone',
     birthDate: 'birthDate',
     notes: 'notes',
@@ -7320,6 +7415,9 @@ export namespace Prisma {
     start: 'start',
     end: 'end',
     status: 'status',
+    backgroundColor: 'backgroundColor',
+    textColor: 'textColor',
+    display: 'display',
     psychologistId: 'psychologistId',
     patientId: 'patientId',
     createdAt: 'createdAt',
@@ -7398,6 +7496,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender'
+   */
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender[]'
+   */
+  export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
     
 
 
@@ -7572,6 +7684,9 @@ export namespace Prisma {
     psychologistId?: UuidFilter<"Patient"> | string
     name?: StringFilter<"Patient"> | string
     email?: StringNullableFilter<"Patient"> | string | null
+    cpf?: StringNullableFilter<"Patient"> | string | null
+    rg?: StringNullableFilter<"Patient"> | string | null
+    gender?: EnumGenderNullableFilter<"Patient"> | $Enums.Gender | null
     phone?: StringFilter<"Patient"> | string
     birthDate?: DateTimeFilter<"Patient"> | Date | string
     notes?: StringNullableFilter<"Patient"> | string | null
@@ -7588,6 +7703,9 @@ export namespace Prisma {
     psychologistId?: SortOrder
     name?: SortOrder
     email?: SortOrderInput | SortOrder
+    cpf?: SortOrderInput | SortOrder
+    rg?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
     phone?: SortOrder
     birthDate?: SortOrder
     notes?: SortOrderInput | SortOrder
@@ -7607,6 +7725,9 @@ export namespace Prisma {
     psychologistId?: UuidFilter<"Patient"> | string
     name?: StringFilter<"Patient"> | string
     email?: StringNullableFilter<"Patient"> | string | null
+    cpf?: StringNullableFilter<"Patient"> | string | null
+    rg?: StringNullableFilter<"Patient"> | string | null
+    gender?: EnumGenderNullableFilter<"Patient"> | $Enums.Gender | null
     phone?: StringFilter<"Patient"> | string
     birthDate?: DateTimeFilter<"Patient"> | Date | string
     notes?: StringNullableFilter<"Patient"> | string | null
@@ -7623,6 +7744,9 @@ export namespace Prisma {
     psychologistId?: SortOrder
     name?: SortOrder
     email?: SortOrderInput | SortOrder
+    cpf?: SortOrderInput | SortOrder
+    rg?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
     phone?: SortOrder
     birthDate?: SortOrder
     notes?: SortOrderInput | SortOrder
@@ -7642,6 +7766,9 @@ export namespace Prisma {
     psychologistId?: UuidWithAggregatesFilter<"Patient"> | string
     name?: StringWithAggregatesFilter<"Patient"> | string
     email?: StringNullableWithAggregatesFilter<"Patient"> | string | null
+    cpf?: StringNullableWithAggregatesFilter<"Patient"> | string | null
+    rg?: StringNullableWithAggregatesFilter<"Patient"> | string | null
+    gender?: EnumGenderNullableWithAggregatesFilter<"Patient"> | $Enums.Gender | null
     phone?: StringWithAggregatesFilter<"Patient"> | string
     birthDate?: DateTimeWithAggregatesFilter<"Patient"> | Date | string
     notes?: StringNullableWithAggregatesFilter<"Patient"> | string | null
@@ -7771,6 +7898,9 @@ export namespace Prisma {
     start?: DateTimeFilter<"Appointment"> | Date | string
     end?: DateTimeFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
+    backgroundColor?: StringNullableFilter<"Appointment"> | string | null
+    textColor?: StringNullableFilter<"Appointment"> | string | null
+    display?: StringNullableFilter<"Appointment"> | string | null
     psychologistId?: UuidFilter<"Appointment"> | string
     patientId?: UuidFilter<"Appointment"> | string
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
@@ -7785,6 +7915,9 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
+    backgroundColor?: SortOrderInput | SortOrder
+    textColor?: SortOrderInput | SortOrder
+    display?: SortOrderInput | SortOrder
     psychologistId?: SortOrder
     patientId?: SortOrder
     createdAt?: SortOrder
@@ -7802,6 +7935,9 @@ export namespace Prisma {
     start?: DateTimeFilter<"Appointment"> | Date | string
     end?: DateTimeFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
+    backgroundColor?: StringNullableFilter<"Appointment"> | string | null
+    textColor?: StringNullableFilter<"Appointment"> | string | null
+    display?: StringNullableFilter<"Appointment"> | string | null
     psychologistId?: UuidFilter<"Appointment"> | string
     patientId?: UuidFilter<"Appointment"> | string
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
@@ -7816,6 +7952,9 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
+    backgroundColor?: SortOrderInput | SortOrder
+    textColor?: SortOrderInput | SortOrder
+    display?: SortOrderInput | SortOrder
     psychologistId?: SortOrder
     patientId?: SortOrder
     createdAt?: SortOrder
@@ -7834,6 +7973,9 @@ export namespace Prisma {
     start?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     end?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusWithAggregatesFilter<"Appointment"> | $Enums.AppointmentStatus
+    backgroundColor?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    textColor?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    display?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
     psychologistId?: UuidWithAggregatesFilter<"Appointment"> | string
     patientId?: UuidWithAggregatesFilter<"Appointment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
@@ -8043,6 +8185,9 @@ export namespace Prisma {
     id?: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -8059,6 +8204,9 @@ export namespace Prisma {
     psychologistId: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -8073,6 +8221,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8089,6 +8240,9 @@ export namespace Prisma {
     psychologistId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8104,6 +8258,9 @@ export namespace Prisma {
     psychologistId: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -8116,6 +8273,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8129,6 +8289,9 @@ export namespace Prisma {
     psychologistId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8273,6 +8436,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -8285,6 +8451,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     psychologistId: string
     patientId: string
     createdAt?: Date | string
@@ -8297,6 +8466,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8309,6 +8481,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     psychologistId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8321,6 +8496,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     psychologistId: string
     patientId: string
     createdAt?: Date | string
@@ -8333,6 +8511,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8343,6 +8524,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     psychologistId?: StringFieldUpdateOperationsInput | string
     patientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8662,6 +8846,13 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type EnumGenderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
+  }
+
   export type PsychologistScalarRelationFilter = {
     is?: PsychologistWhereInput
     isNot?: PsychologistWhereInput
@@ -8672,6 +8863,9 @@ export namespace Prisma {
     psychologistId?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    cpf?: SortOrder
+    rg?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     birthDate?: SortOrder
     notes?: SortOrder
@@ -8685,6 +8879,9 @@ export namespace Prisma {
     psychologistId?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    cpf?: SortOrder
+    rg?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     birthDate?: SortOrder
     notes?: SortOrder
@@ -8698,12 +8895,25 @@ export namespace Prisma {
     psychologistId?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    cpf?: SortOrder
+    rg?: SortOrder
+    gender?: SortOrder
     phone?: SortOrder
     birthDate?: SortOrder
     notes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+  }
+
+  export type EnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel> | $Enums.Gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumGenderNullableFilter<$PrismaModel>
+    _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
   export type EnumSessionStatusFilter<$PrismaModel = never> = {
@@ -8797,6 +9007,9 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    display?: SortOrder
     psychologistId?: SortOrder
     patientId?: SortOrder
     createdAt?: SortOrder
@@ -8809,6 +9022,9 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    display?: SortOrder
     psychologistId?: SortOrder
     patientId?: SortOrder
     createdAt?: SortOrder
@@ -8821,6 +9037,9 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     status?: SortOrder
+    backgroundColor?: SortOrder
+    textColor?: SortOrder
+    display?: SortOrder
     psychologistId?: SortOrder
     patientId?: SortOrder
     createdAt?: SortOrder
@@ -9138,6 +9357,10 @@ export namespace Prisma {
     connect?: AppointmentWhereUniqueInput | AppointmentWhereUniqueInput[]
   }
 
+  export type NullableEnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender | null
+  }
+
   export type SessionUpdateManyWithoutPatientNestedInput = {
     create?: XOR<SessionCreateWithoutPatientInput, SessionUncheckedCreateWithoutPatientInput> | SessionCreateWithoutPatientInput[] | SessionUncheckedCreateWithoutPatientInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutPatientInput | SessionCreateOrConnectWithoutPatientInput[]
@@ -9445,6 +9668,23 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
+  }
+
+  export type NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel> | $Enums.Gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumGenderNullableFilter<$PrismaModel>
+    _max?: NestedEnumGenderNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumSessionStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.SessionStatus | EnumSessionStatusFieldRefInput<$PrismaModel>
     in?: $Enums.SessionStatus[] | ListEnumSessionStatusFieldRefInput<$PrismaModel>
@@ -9525,6 +9765,9 @@ export namespace Prisma {
     id?: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -9539,6 +9782,9 @@ export namespace Prisma {
     id?: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -9610,6 +9856,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -9621,6 +9870,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     patientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9691,6 +9943,9 @@ export namespace Prisma {
     psychologistId?: UuidFilter<"Patient"> | string
     name?: StringFilter<"Patient"> | string
     email?: StringNullableFilter<"Patient"> | string | null
+    cpf?: StringNullableFilter<"Patient"> | string | null
+    rg?: StringNullableFilter<"Patient"> | string | null
+    gender?: EnumGenderNullableFilter<"Patient"> | $Enums.Gender | null
     phone?: StringFilter<"Patient"> | string
     birthDate?: DateTimeFilter<"Patient"> | Date | string
     notes?: StringNullableFilter<"Patient"> | string | null
@@ -9761,6 +10016,9 @@ export namespace Prisma {
     start?: DateTimeFilter<"Appointment"> | Date | string
     end?: DateTimeFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
+    backgroundColor?: StringNullableFilter<"Appointment"> | string | null
+    textColor?: StringNullableFilter<"Appointment"> | string | null
+    display?: StringNullableFilter<"Appointment"> | string | null
     psychologistId?: UuidFilter<"Appointment"> | string
     patientId?: UuidFilter<"Appointment"> | string
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
@@ -9849,6 +10107,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -9860,6 +10121,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     psychologistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10047,6 +10311,9 @@ export namespace Prisma {
     id?: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -10062,6 +10329,9 @@ export namespace Prisma {
     psychologistId: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -10140,6 +10410,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10155,6 +10428,9 @@ export namespace Prisma {
     psychologistId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10211,6 +10487,9 @@ export namespace Prisma {
     id?: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -10226,6 +10505,9 @@ export namespace Prisma {
     psychologistId: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -10304,6 +10586,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10319,6 +10604,9 @@ export namespace Prisma {
     psychologistId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10424,6 +10712,9 @@ export namespace Prisma {
     id?: string
     name: string
     email?: string | null
+    cpf?: string | null
+    rg?: string | null
+    gender?: $Enums.Gender | null
     phone: string
     birthDate: Date | string
     notes?: string | null
@@ -10455,6 +10746,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     patientId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10475,6 +10769,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10489,6 +10786,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10503,6 +10803,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    rg?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     phone?: StringFieldUpdateOperationsInput | string
     birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10570,6 +10873,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10581,6 +10887,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10592,6 +10901,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     patientId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10651,6 +10963,9 @@ export namespace Prisma {
     start: Date | string
     end: Date | string
     status: $Enums.AppointmentStatus
+    backgroundColor?: string | null
+    textColor?: string | null
+    display?: string | null
     psychologistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -10716,6 +11031,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10727,6 +11045,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     psychologistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10738,6 +11059,9 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
+    backgroundColor?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: NullableStringFieldUpdateOperationsInput | string | null
+    display?: NullableStringFieldUpdateOperationsInput | string | null
     psychologistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

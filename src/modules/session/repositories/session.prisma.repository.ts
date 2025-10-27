@@ -11,9 +11,24 @@ export class SessionPrismaRepository implements ISessionRepository {
     return this.prisma.session.create({ data });
   }
 
-  async read(): Promise<ResponseSessionDTO[]> {
-    const clients = await this.prisma.session.findMany();
-    return clients;
+  async read(
+    psychologistId: string,
+    patientId: string
+  ): Promise<ResponseSessionDTO[]> {
+    const sessions = await this.prisma.session.findMany({
+      where: {
+        psychologistId: psychologistId,
+        patientId: patientId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return sessions.map((p) => ({
+      ...p,
+      sessionDateFormatted: p.sessionDate.toLocaleDateString("pt-BR"),
+    }));
   }
 
   async update(

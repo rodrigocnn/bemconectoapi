@@ -11,11 +11,21 @@ export class PatientPrismaRepository implements IPatientRepository {
     return this.prisma.patient.create({ data });
   }
 
-  async read(): Promise<ResponsePatientDTO[]> {
+  async read(psychologistId: string): Promise<ResponsePatientDTO[]> {
     const patients = await this.prisma.patient.findMany({
-      where: { deletedAt: null },
+      where: { deletedAt: null, psychologistId: psychologistId },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
-    return patients;
+
+    return patients.map((p) => ({
+      ...p,
+      birthDate: p.birthDate,
+      ...(p.birthDate && {
+        birthDateFormatted: p.birthDate.toLocaleDateString("pt-BR"),
+      }),
+    }));
   }
 
   async update(
@@ -44,6 +54,14 @@ export class PatientPrismaRepository implements IPatientRepository {
   async exists(id: string): Promise<boolean> {
     const result = await this.prisma.patient.findUnique({
       where: { id },
+    });
+
+    return result !== null;
+  }
+
+  async emailAlreadyExist(email: string): Promise<boolean> {
+    const result = await this.prisma.patient.findFirst({
+      where: { email },
     });
 
     return result !== null;

@@ -5,10 +5,12 @@ import psychologistsRoutes from "../../modules/psychologist/routes/psychologist.
 import authRoutes from "../../modules/auth/routes/auth.routes";
 import userRoutes from "../../modules/user/routes/user.routes";
 import { sessionRoutes } from "../../modules/session/routes/session.routes";
+import { dashboardRoutes } from "../../modules/dashboard/routes";
 
 export const router = Router();
 
 router.use(authRoutes);
+router.use(dashboardRoutes);
 router.use(userRoutes);
 router.use(psychologistsRoutes);
 router.use(patientRoutes);
