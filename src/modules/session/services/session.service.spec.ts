@@ -1,23 +1,6 @@
-import { CreateSessionDTO } from "../dtos/create-session.dto";
+import { sessionData } from "../_mocks_/session.mocks";
 import { ISessionRepository } from "../repositories/session.repository";
 import { SessionService } from "./session.service";
-
-function makeSession(): CreateSessionDTO {
-  return {
-    psychologistId: "11111111-1111-1111-1111-111111111111",
-    patientId: "22222222-2222-2222-2222-222222222222",
-    sessionDate: new Date(),
-    summary: "Patient reported improvement in mood and reduced anxiety.",
-    behavioralObservations: "Calm, engaged, cooperative.",
-    interventions: "Cognitive restructuring, relaxation techniques.",
-    patientReactions: "Responded positively to interventions.",
-    referrals: "None at this time.",
-    therapeuticPlans: "Continue weekly sessions focusing on coping strategies.",
-    diagnosticHypotheses: "Generalized Anxiety Disorder.",
-    techniqueUsed: "CBT",
-    status: "SCHEDULED",
-  };
-}
 
 describe("ReservationService", () => {
   let mockSessionRepository: ISessionRepository;
@@ -38,7 +21,6 @@ describe("ReservationService", () => {
 
   describe("create", () => {
     it("should create a session successfully", async () => {
-      const sessionData = makeSession();
       const expectedSession = {
         id: "uuid-123",
         ...sessionData,
@@ -61,22 +43,27 @@ describe("ReservationService", () => {
   describe("read", () => {
     it("should return all sessions", async () => {
       const sessions = [
-        { id: "uuid-1", ...makeSession() },
-        { id: "uuid-2", ...makeSession() },
+        { id: "uuid-1", ...sessionData },
+        { id: "uuid-2", ...sessionData },
       ];
 
       (mockSessionRepository.read as jest.Mock).mockResolvedValue(sessions);
 
-      const result = await sessionService.read();
+      const psychologistId = sessionData.psychologistId;
+      const patientId = sessionData.psychologistId;
+      const result = await sessionService.read(psychologistId, patientId);
 
-      expect(mockSessionRepository.read).toHaveBeenCalled();
+      expect(mockSessionRepository.read).toHaveBeenCalledWith(
+        psychologistId,
+        patientId
+      );
       expect(result).toEqual(sessions);
     });
   });
 
   describe("show", () => {
     it("should return a session by id", async () => {
-      const session = { id: "uuid-123", ...makeSession() };
+      const session = { id: "uuid-123", ...sessionData };
 
       (mockSessionRepository.show as jest.Mock).mockResolvedValue(session);
 
@@ -90,7 +77,7 @@ describe("ReservationService", () => {
   describe("update", () => {
     it("should update a session successfully", async () => {
       const updatedSession = {
-        ...makeSession(),
+        ...sessionData,
       };
 
       (mockSessionRepository.update as jest.Mock).mockResolvedValue(
