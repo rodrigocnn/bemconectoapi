@@ -31,12 +31,19 @@ model  Psychologist {
   @@map("psychologists") 
 }
 
+enum Gender {
+  MASCULINO
+  FEMININO
+}
 
 model Patient {
   id             String      @id @default(uuid()) @db.Uuid
   psychologistId String      @db.Uuid
   name           String      @db.VarChar(255)
   email          String?     @db.VarChar(255)
+  cpf            String?
+  rg             String?
+  gender         Gender?
   phone          String      @db.VarChar(20)
   birthDate      DateTime   
   notes          String?     @db.Text
@@ -85,24 +92,25 @@ model Session {
   @@map("sessions")
 }
 
-
-
-
 enum AppointmentStatus {
-  PENDING     // aguardando confirmação
+  SCHEDULED   // agendado
   CONFIRMED   // confirmado
   RESCHEDULED // reagendado
+  COMPLETED   // concluído / atendido
   CANCELED    // cancelado
+  PENDING
 }
-
 
 model Appointment{
     id                    String          @id @default(uuid()) @db.Uuid
     start                 DateTime
     end                   DateTime
     status                AppointmentStatus
-    psychologistId        String          @db.Uuid
-    patientId             String          @db.Uuid
+    backgroundColor       String?
+    textColor             String?
+    display               String?
+    psychologistId        String            @db.Uuid
+    patientId             String            @db.Uuid
     createdAt             DateTime          @default(now())
     updatedAt             DateTime          @updatedAt
     deletedAt             DateTime?
@@ -115,6 +123,8 @@ model Appointment{
     @@map("appointments")
 }
 
+
+ 
 enum UserRole {
   ADMIN
   PSYCHOLOGIST
