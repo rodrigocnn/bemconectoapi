@@ -13,6 +13,9 @@ export class AppointmentPrismaRepository implements IAppointmentRepository {
         start: new Date(data.start),
         end: new Date(data.end),
         status: data.status ?? "PENDING",
+        backgroundColor: data.backgroundColor,
+        textColor: data.textColor,
+        display: data.display,
         psychologist: { connect: { id: data.psychologistId } },
         patient: { connect: { id: data.patientId } },
       },
@@ -21,9 +24,33 @@ export class AppointmentPrismaRepository implements IAppointmentRepository {
     return appointment;
   }
 
-  async read(): Promise<ResponseAppointmentDTO[]> {
-    const appointments = await this.prisma.appointment.findMany();
-    return appointments;
+  async read(psychologistId: string): Promise<ResponseAppointmentDTO[]> {
+    const appointments = await this.prisma.appointment.findMany({
+      include: {
+        patient: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      where: { psychologistId: psychologistId },
+    });
+
+    return appointments.map((appt) => ({
+      id: appt.id,
+      start: appt.start,
+      end: appt.end,
+      status: appt.status,
+      backgroundColor: appt.backgroundColor,
+      textColor: appt.textColor,
+      display: appt.display,
+      psychologistId: appt.psychologistId,
+      patientId: appt.patientId,
+      createdAt: appt.createdAt,
+      updatedAt: appt.updatedAt,
+      deletedAt: appt.deletedAt,
+      title: appt.patient.name, // <- aqui o nome do paciente vira "title"
+    }));
   }
 
   async update(

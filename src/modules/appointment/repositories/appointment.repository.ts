@@ -3,7 +3,7 @@ import { ResponseAppointmentDTO } from "../dtos/response-appointment.dto";
 
 export interface IAppointmentRepository {
   create(data: CreateAppointmentDTO): Promise<ResponseAppointmentDTO>;
-  read(): Promise<ResponseAppointmentDTO[]>;
+  read(psychologistId: string): Promise<ResponseAppointmentDTO[]>;
   update(
     id: string,
     data: CreateAppointmentDTO

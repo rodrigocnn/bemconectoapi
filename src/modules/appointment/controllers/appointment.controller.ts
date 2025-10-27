@@ -24,7 +24,8 @@ export class AppointmentController {
 
   async read(req: Request, res: Response) {
     try {
-      const appointments = await this.appointmentService.read();
+      const psychologistId = req.user!.psychologistId;
+      const appointments = await this.appointmentService.read(psychologistId);
       return res.status(200).json(appointments);
     } catch (error) {
       console.error(error);
