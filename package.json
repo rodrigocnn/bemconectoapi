@@ -8,7 +8,7 @@
     "queue": "ts-node src/jobs/notificationWorker.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
