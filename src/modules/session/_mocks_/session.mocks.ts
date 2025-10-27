@@ -1,8 +1,8 @@
 import { CreateSessionDTO } from "../dtos/create-session.dto";
 
 export const sessionData: CreateSessionDTO = {
-  psychologistId: "11111111-1111-1111-1111-111111111111",
-  patientId: "22222222-2222-2222-2222-222222222222",
+  psychologistId: "e497d9ce-2614-453b-baca-4292dfdea031",
+  patientId: "0a03529c-b6e2-4290-b5a9-9ed0c2445ab8",
   sessionDate: new Date(),
   summary: "Patient reported improvement in mood and reduced anxiety.",
   behavioralObservations: "Calm, engaged, cooperative.",
