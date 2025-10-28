@@ -7,13 +7,18 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     services:
       redis:
         image: redis:7
         ports:
           - 6379:6379
         options: >-
-          --requirepass ""   # se quiser senha, configure aqui
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
