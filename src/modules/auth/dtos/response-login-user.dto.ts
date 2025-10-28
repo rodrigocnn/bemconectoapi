@@ -14,9 +14,7 @@ export interface LoginDataDefault {
   password: string;
   role: string;
   psychologistId: string;
-  createdAt:Date;
-  updatedAt: Date,
-  deletedAt: Date | null
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
 }
-
-

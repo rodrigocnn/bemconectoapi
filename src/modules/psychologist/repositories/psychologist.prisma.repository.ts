@@ -26,20 +26,22 @@ export class PsychologistPrismaRepository implements IPsychologistRepository {
     return this.prisma.psychologist.findFirst({ where: { id: id } });
   }
 
-async update(id: string, data: CreatePsychologistDTO): Promise<PsychologistResponseDTO | null> {
+  async update(
+    id: string,
+    data: CreatePsychologistDTO
+  ): Promise<PsychologistResponseDTO | null> {
+    const existing = await this.prisma.psychologist.findUnique({
+      where: { id },
+    });
+    if (!existing) {
+      return null;
+    }
 
-  const existing = await this.prisma.psychologist.findUnique({ where: { id } });
-  if (!existing) {
-    return null; 
+    const updated = await this.prisma.psychologist.update({
+      where: { id },
+      data,
+    });
+
+    return PsychologistMapper.toDTO(updated);
   }
-
-  const updated = await this.prisma.psychologist.update({
-    where: { id },
-    data,
-  });
-
-  return PsychologistMapper.toDTO(updated);
 }
-
-}
-

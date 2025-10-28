@@ -17,5 +17,3 @@ export class AuthPrismaRepository implements IAuthRepository {
     return result !== null;
   }
 }
-
-
