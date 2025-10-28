@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .ts --max-warnings=0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "jest --forceExit"
+    "test": "jest --forceExit",
+    "build": "tsc"
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
