@@ -81,8 +81,9 @@ export class DashboardService {
     const chartNewPatients: number[] = [];
 
     for (const month of months) {
-      const total =
-        await this.dashboardRepository.getTotalNewPatientsByMonth(month);
+      const total = await this.dashboardRepository.getTotalNewPatientsByMonth(
+        month
+      );
       chartNewPatients.push(total);
     }
 
@@ -102,7 +103,7 @@ export class DashboardService {
 
     for (const status of statuses) {
       const total = await this.dashboardRepository.getTotalByStatusCurrentMonth(
-        status as any,
+        status as any
       );
       chartAppointments.push(total);
     }

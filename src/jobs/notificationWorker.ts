@@ -16,7 +16,7 @@ export const notificationWorker = new Worker(
     // Aqui futuramente você chamaria o recurso real (WhatsApp, email, etc.)
     console.log("aqui será chamada recurso , no caso pode ser WhatsApp");
   },
-  { connection },
+  { connection }
 );
 
 notificationWorker.on("completed", (job) => {

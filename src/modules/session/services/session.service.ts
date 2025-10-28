@@ -11,7 +11,7 @@ export class SessionService {
 
   async read(
     psychologistId: string,
-    patientId: string,
+    patientId: string
   ): Promise<ResponseSessionDTO[]> {
     return this.sessionRepository.read(psychologistId, patientId);
   }
@@ -22,7 +22,7 @@ export class SessionService {
 
   async update(
     id: string,
-    data: CreateSessionDTO,
+    data: CreateSessionDTO
   ): Promise<ResponseSessionDTO | null> {
     return this.sessionRepository.update(id, data);
   }

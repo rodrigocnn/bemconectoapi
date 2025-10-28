@@ -28,7 +28,7 @@ export class PatientService {
   }
   async update(
     id: string,
-    data: CreatePatientDTO,
+    data: CreatePatientDTO
   ): Promise<ResponsePatientDTO> {
     const currentPatient = await this.patientRepository.show(id);
     if (!currentPatient) {

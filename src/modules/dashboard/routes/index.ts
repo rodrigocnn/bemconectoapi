@@ -14,5 +14,5 @@ const dashboardService = new DashboardService(dashboardRepository);
 const dashboardController = new DashboardController(dashboardService);
 
 dashboardRoutes.get("/dashboard", authMiddleware, (req, res) =>
-  dashboardController.index(req, res),
+  dashboardController.index(req, res)
 );

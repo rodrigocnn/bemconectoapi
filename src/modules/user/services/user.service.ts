@@ -33,7 +33,7 @@ export class UserService {
   // Atualizar usuário
   async update(
     id: string,
-    data: CreateUserDTO,
+    data: CreateUserDTO
   ): Promise<ResponseUserDTO | null> {
     // Opcional: re-hash se a senha estiver sendo atualizada
     if (data.password) {

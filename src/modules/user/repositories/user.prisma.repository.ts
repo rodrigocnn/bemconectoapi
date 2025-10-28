@@ -54,7 +54,7 @@ export class UserPrismaRepository implements IUserRepository {
 
   async update(
     id: string,
-    data: CreateUserDTO,
+    data: CreateUserDTO
   ): Promise<ResponseUserDTO | null> {
     const user = await this.prisma.user.update({
       where: { id },

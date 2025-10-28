@@ -7,7 +7,7 @@ export interface IPsychologistRepository {
   read(): Promise<PsychologistResponseDTO[]>;
   update(
     id: string,
-    data: CreatePsychologistDTO,
+    data: CreatePsychologistDTO
   ): Promise<PsychologistResponseDTO | null>;
   show(id: string): Promise<PsychologistResponseDTO | null>;
 }

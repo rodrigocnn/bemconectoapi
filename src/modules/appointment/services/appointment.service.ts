@@ -31,7 +31,7 @@ export class AppointmentService {
 
   async update(
     id: string,
-    data: CreateAppointmentDTO,
+    data: CreateAppointmentDTO
   ): Promise<ResponseAppointmentDTO | null> {
     const mappedAppointment = mapToUpdatedAppointment(data);
     return this.appointmentRepository.update(id, mappedAppointment);

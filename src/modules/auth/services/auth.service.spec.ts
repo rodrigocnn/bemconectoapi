@@ -75,7 +75,7 @@ describe("UsersService", () => {
       authService.login({
         email: login.email,
         password: "zxc123",
-      }),
+      })
     ).rejects.toThrow("Email ou Password Incorrect");
   });
 
@@ -90,7 +90,7 @@ describe("UsersService", () => {
       authService.login({
         email: login.email,
         password: "zxc123",
-      }),
+      })
     ).rejects.toThrow("Email ou Password Incorrect");
   });
 });

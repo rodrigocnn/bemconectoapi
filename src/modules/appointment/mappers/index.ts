@@ -14,7 +14,7 @@ export function mapToScheduledAppointment(data: CreateAppointmentDTO) {
 export function mapToUpdatedAppointment(data: CreateAppointmentDTO) {
   let backgroundColor = "";
   let textColor = "#fff";
-  let display = "block";
+  const display = "block";
 
   switch (data.status) {
     case AppointmentStatus.SCHEDULED:

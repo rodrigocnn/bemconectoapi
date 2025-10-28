@@ -7,7 +7,7 @@ export interface IPatientRepository {
   read(psychologistId: string): Promise<ResponsePatientDTO[]>;
   update(
     id: string,
-    data: CreatePatientDTO,
+    data: CreatePatientDTO
   ): Promise<ResponsePatientDTO | null>;
   show(id: string): Promise<ResponsePatientDTO | null>;
   delete(id: string): Promise<void>;
