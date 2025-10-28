@@ -1,5 +1,5 @@
-import { ResponseLoginDTO } from "../dtos/response-login-user.dto";
+import { LoginDataDefault } from "../dtos/response-login-user.dto";
 
 export interface IAuthRepository {
-  findByEmail(email: string): Promise<ResponseLoginDTO>;
+  findByEmail(email: string): Promise<LoginDataDefault>;
 }

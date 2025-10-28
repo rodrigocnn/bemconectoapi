@@ -1,5 +1,3 @@
-import { AppointmentStatus } from "../enums";
-
 export interface ResponseAppointmentDTO {
   id: string;
   start: Date;
