@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "queue": "ts-node src/jobs/notificationWorker.ts",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .ts --max-warnings=0",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "jest --forceExit"
   },
   "dependencies": {
