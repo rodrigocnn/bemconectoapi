@@ -30,7 +30,7 @@ describe("ReservationService", () => {
       };
 
       (mockSessionRepository.create as jest.Mock).mockResolvedValue(
-        expectedSession
+        expectedSession,
       );
 
       const result = await sessionService.create(sessionData);
@@ -55,7 +55,7 @@ describe("ReservationService", () => {
 
       expect(mockSessionRepository.read).toHaveBeenCalledWith(
         psychologistId,
-        patientId
+        patientId,
       );
       expect(result).toEqual(sessions);
     });
@@ -81,14 +81,14 @@ describe("ReservationService", () => {
       };
 
       (mockSessionRepository.update as jest.Mock).mockResolvedValue(
-        updatedSession
+        updatedSession,
       );
 
       const result = await sessionService.update("uuid-123", updatedSession);
 
       expect(mockSessionRepository.update).toHaveBeenCalledWith(
         "uuid-123",
-        updatedSession
+        updatedSession,
       );
       expect(result).toEqual(updatedSession);
     });

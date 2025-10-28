@@ -26,7 +26,7 @@ describe("PatientService", () => {
       const expectedPatient = { id: "uuid-123", ...patientData };
 
       (mockPatientRepository.create as jest.Mock).mockResolvedValue(
-        expectedPatient
+        expectedPatient,
       );
 
       const result = await patientService.create(patientData);
@@ -44,7 +44,7 @@ describe("PatientService", () => {
       ];
 
       (mockPatientRepository.read as jest.Mock).mockResolvedValue(
-        expectedPatients
+        expectedPatients,
       );
       const psychologistId = "e497d9ce-2614-453b-baca-4292dfdea031";
       const result = await patientService.read(psychologistId);
@@ -59,11 +59,11 @@ describe("PatientService", () => {
       const expectedPatient = [{ id: "uuid-123", ...patientData }];
 
       (mockPatientRepository.update as jest.Mock).mockResolvedValue(
-        expectedPatient
+        expectedPatient,
       );
 
       (mockPatientRepository.show as jest.Mock).mockResolvedValue(
-        expectedPatient
+        expectedPatient,
       );
 
       const result = await patientService.update("uuid-123", patientData);
@@ -88,7 +88,7 @@ describe("PatientService", () => {
       const expectedPatient = [{ id: "uuid-123", ...patientData }];
 
       (mockPatientRepository.show as jest.Mock).mockResolvedValue(
-        expectedPatient
+        expectedPatient,
       );
 
       const result = await patientService.show("uuid-123");

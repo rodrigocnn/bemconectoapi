@@ -30,7 +30,7 @@ export class PatientPrismaRepository implements IPatientRepository {
 
   async update(
     id: string,
-    data: CreatePatientDTO
+    data: CreatePatientDTO,
   ): Promise<ResponsePatientDTO | null> {
     return await this.prisma.patient.update({
       where: { id },

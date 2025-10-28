@@ -10,7 +10,7 @@ export const createReservationSchema = z.object({
       }
       return val;
     },
-    z.date({ error: "Data e hora inválidas" })
+    z.date({ error: "Data e hora inválidas" }),
   ),
   status: z.string({ error: "Status deve ser verdadeiro ou falso" }),
   patientId: z.uuid({ error: "ID do cliente inválido" }),

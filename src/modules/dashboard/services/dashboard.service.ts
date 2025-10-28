@@ -102,7 +102,7 @@ export class DashboardService {
 
     for (const status of statuses) {
       const total = await this.dashboardRepository.getTotalByStatusCurrentMonth(
-        status as any
+        status as any,
       );
       chartAppointments.push(total);
     }

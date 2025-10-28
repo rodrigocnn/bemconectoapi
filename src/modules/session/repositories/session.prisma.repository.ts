@@ -13,7 +13,7 @@ export class SessionPrismaRepository implements ISessionRepository {
 
   async read(
     psychologistId: string,
-    patientId: string
+    patientId: string,
   ): Promise<ResponseSessionDTO[]> {
     const sessions = await this.prisma.session.findMany({
       where: {
@@ -33,7 +33,7 @@ export class SessionPrismaRepository implements ISessionRepository {
 
   async update(
     id: string,
-    data: CreateSessionDTO
+    data: CreateSessionDTO,
   ): Promise<ResponseSessionDTO | null> {
     return await this.prisma.session.update({
       where: { id },

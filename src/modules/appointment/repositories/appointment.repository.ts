@@ -6,7 +6,7 @@ export interface IAppointmentRepository {
   read(psychologistId: string): Promise<ResponseAppointmentDTO[]>;
   update(
     id: string,
-    data: CreateAppointmentDTO
+    data: CreateAppointmentDTO,
   ): Promise<ResponseAppointmentDTO | null>;
   show(id: string): Promise<ResponseAppointmentDTO | null>;
   delete(id: string): Promise<void>;

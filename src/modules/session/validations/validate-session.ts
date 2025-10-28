@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 export function validateReservation<T>(
   schema: ZodSchema<T>,
   req: Request,
-  res: Response
+  res: Response,
 ): T | null {
   const result = schema.safeParse(req.body);
 

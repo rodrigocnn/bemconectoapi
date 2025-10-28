@@ -55,7 +55,7 @@ export class AppointmentPrismaRepository implements IAppointmentRepository {
 
   async update(
     id: string,
-    data: CreateAppointmentDTO
+    data: CreateAppointmentDTO,
   ): Promise<ResponseAppointmentDTO | null> {
     return await this.prisma.appointment.update({
       where: { id },

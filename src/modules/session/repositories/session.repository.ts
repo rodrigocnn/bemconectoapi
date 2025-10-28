@@ -5,11 +5,11 @@ export interface ISessionRepository {
   create(data: CreateSessionDTO): Promise<ResponseSessionDTO>;
   read(
     psychologistId: string,
-    patientId: string
+    patientId: string,
   ): Promise<ResponseSessionDTO[]>;
   update(
     id: string,
-    data: CreateSessionDTO
+    data: CreateSessionDTO,
   ): Promise<ResponseSessionDTO | null>;
   show(id: string): Promise<ResponseSessionDTO | null>;
   delete(id: string): Promise<void>;

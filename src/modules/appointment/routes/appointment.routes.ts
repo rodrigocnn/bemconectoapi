@@ -12,17 +12,17 @@ const appointmentService = new AppointmentService(appointmentRepository);
 const appointmentController = new AppointmentController(appointmentService);
 
 appointmentRoutes.post("/agenda", authMiddleware, (req, res) =>
-  appointmentController.create(req, res)
+  appointmentController.create(req, res),
 );
 
 appointmentRoutes.get("/agenda", authMiddleware, (req, res) =>
-  appointmentController.read(req, res)
+  appointmentController.read(req, res),
 );
 
 appointmentRoutes.get("/agenda/:id", authMiddleware, (req, res) =>
-  appointmentController.show(req, res)
+  appointmentController.show(req, res),
 );
 
 appointmentRoutes.put("/agenda/:id", authMiddleware, (req, res) =>
-  appointmentController.update(req, res)
+  appointmentController.update(req, res),
 );

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 export function authorize(
-  roles: string[]
+  roles: string[],
 ): (req: Request, res: Response, next: NextFunction) => void {
   return (req: Request, res: Response, next: NextFunction): void => {
     const user = req.user;

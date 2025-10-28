@@ -11,7 +11,7 @@ interface JwtPayload {
 export function authMiddleware(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const authHeader = req.headers.authorization;

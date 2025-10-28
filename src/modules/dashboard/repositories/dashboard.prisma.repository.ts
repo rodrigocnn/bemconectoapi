@@ -39,7 +39,7 @@ export class DashboardPrismaRepository implements IDashboardRepository {
   private async getAppointmentCountByStatus(
     status: AppointmentStatus,
     start?: Date,
-    end?: Date
+    end?: Date,
   ) {
     return this.prisma.appointment.count({
       where: {
@@ -54,7 +54,7 @@ export class DashboardPrismaRepository implements IDashboardRepository {
   }
 
   async getTotalByStatusCurrentMonth(
-    status: AppointmentStatus
+    status: AppointmentStatus,
   ): Promise<number> {
     const date = new Date();
     const start = new Date(date.getFullYear(), date.getMonth(), 1);

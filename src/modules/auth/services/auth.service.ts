@@ -35,7 +35,7 @@ export class AuthService {
         psychologistId: userExist.psychologistId,
       },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1d" }
+      { expiresIn: "1d" },
     );
 
     return {
