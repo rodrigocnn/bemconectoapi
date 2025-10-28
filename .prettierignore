@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Prisma client (gerado)
+prisma/generated/
+
+# Config files ou outros que você não quer formatar
+.eslintrc.cjs
